@@ -1,6 +1,6 @@
-FROM php:7.3.9-fpm-alpine3.10
+FROM php:7.4.2-fpm-alpine3.10
 
-LABEL maintainer="Ric Harvey <ric@ngd.io>"
+LABEL maintainer="GameTactic <spam@gametactic.eu>"
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
@@ -200,14 +200,10 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     libjpeg-turbo-dev \
     postgresql-dev && \
     docker-php-ext-configure gd \
-      --with-gd \
-      --with-freetype-dir=/usr/include/ \
-      --with-png-dir=/usr/include/ \
-      --with-jpeg-dir=/usr/include/ && \
-    #curl iconv session
-    #docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
-    docker-php-ext-install iconv pdo_mysql pdo_sqlite pgsql pdo_pgsql mysqli gd exif intl xsl json soap dom zip opcache && \
-    pecl install xdebug-2.7.2 && \
+      --with-freetype \
+      --with-jpeg && \
+    docker-php-ext-install iconv pdo_mysql mysqli gd exif intl soap dom zip opcache && \
+    pecl install xdebug-2.9.0 && \
     pecl install -o -f redis && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     docker-php-source delete && \
