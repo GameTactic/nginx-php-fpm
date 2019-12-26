@@ -1,4 +1,4 @@
-FROM php:7.4.2-fpm-alpine3.10
+FROM php:7.4.1-fpm-alpine3.10
 
 LABEL maintainer="GameTactic <spam@gametactic.eu>"
 
